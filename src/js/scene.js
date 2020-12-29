@@ -40,8 +40,8 @@ export default class Scene{
 		const light = new THREE.PointLight( 0xffffff, 1, 1000 );
 		light.position.set(0, 0, 400 );
 		this.scene.add( light );
-		const helper = new THREE.PointLightHelper( light, 5 );
-		this.scene.add( helper );
+		// const helper = new THREE.PointLightHelper( light, 5 );
+		// this.scene.add( helper );
 	}
 
 	initCamera() {
