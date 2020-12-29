@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import shoeFile from '../assets/model/Shoe.gltf';
+import shoeFile from '../assets/model/shoeMat.gltf';
 
 
 
@@ -22,13 +22,15 @@ export default class Model{
 		//const url = '../assets/model/shoes.gltf';
 		this.loader.load( shoeFile, ( gltf ) => {
 			this.shoe = gltf.scene.children[0];
-			this.shoe.children.map((child) => child.material = this.material)
+			//this.shoe.children.map((child) => child.material = this.material)
 			//this.shoe.material = this.material;
+			console.log(this.shoe);
 			this.scene.scene.add( this.shoe );
 			this.shoeCreated = true;
 
-
-		}, undefined, ( error ) => {
+		}, ( xhr ) => {
+			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+		}, ( error ) => {
 			console.error( error );
 		});
 	}
