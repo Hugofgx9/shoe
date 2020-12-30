@@ -12,7 +12,8 @@ export default class Model{
 		this.loader = new GLTFLoader();
 		this.importModel();
 		this.bindEvents();
-		this.shoeCreated = false; 
+		this.shoeCreated = false;
+		this.movement = new THREE.Vector3();
 	}
 
 	importModel() {
@@ -26,7 +27,7 @@ export default class Model{
 			this.shoe = gltf.scene.children[0];
 			//this.shoe.children.map((child) => child.material = this.material)
 			//this.shoe.material = this.material;
-			console.log(this.shoe.rotation.z);
+			console.log(this.shoe.matrix);
 			this.scene.scene.add( this.shoe );
 
 			const shoeAxes = new THREE.AxesHelper( 300 );
@@ -45,15 +46,30 @@ export default class Model{
 	}
 
 	drag(e) {
-		let movement = {x: e.movementY, y: e.movementX, z: 0};
-		let shoeRotation = {x: this.shoe.rotation.x, y: this.shoe.rotation.y, z: this.shoe.rotation.z};
-		let shoeNewRotation = rotation3d(movement, shoeRotation);
-		gsap.to(this.shoe.rotation, 2., {
-			x: `+= ${shoeNewRotation.x * 0.05}`,
-			y: `+= ${shoeNewRotation.y * 0.05}`,
-			z: `+= ${shoeNewRotation.z * 0.05}`,
-			ease: Power1.easeOut,
+		let speed = 0.0004;
+		let newMovement = this.movement;
+		newMovement.x += e.movementX;
+		newMovement.y += e.movementY;
+
+		gsap.to(this.movement, .3, {
+			x: e.movementX,
+			y: e.movementY,
+			onUpdate: () => {
+				this.rotateAroundWorldAxis(this.shoe, new THREE.Vector3(0, 1, 0), this.movement.x * speed);
+				this.rotateAroundWorldAxis(this.shoe, new THREE.Vector3(1, 0, 0), this.movement.y * speed);
+			}
 		});
+	}
+
+	//changer pour aller à la valeur modulo machin la plus proche
+	initRotation() {
+		gsap.to(this.shoe.rotation, 5., {
+			x: 0,
+			y: 0,
+			z: 0,
+			ease: Power1.easeInOut,
+		});
+
 	}
 
 	bindEvents() {
@@ -65,15 +81,34 @@ export default class Model{
 				this.drag(e);
 			}
 		});
-		this.scene.container.addEventListener('mouseup', () => isDown = false );
+		this.scene.container.addEventListener('mouseup', () => isDown = false);
 		this.scene.container.addEventListener('mouseleave', () => isDown = false );
 
 	}
 
 	update() {
 		if ( this.shoeCreated == true ) {
-			//this.shoe.rotation.y += 0.01;
-			//this.shoe.rotation.x += 0.01;
+			this.shoe.rotation.y += 0.01;
+			this.shoe.rotation.x += 0.01;
 		}
+	}
+
+	rotateAroundObjectAxis(object, axis, radians) {
+		let rotationMatrix = new THREE.Matrix4();
+
+		rotationMatrix.makeRotationAxis(axis.normalize(), radians);
+		object.matrix.multiply(rotationMatrix);
+		object.rotation.setFromRotationMatrix( object.matrix );
+
+	}
+
+	rotateAroundWorldAxis( object, axis, radians ) {
+
+		let rotationMatrix = new THREE.Matrix4();
+
+		rotationMatrix.makeRotationAxis( axis.normalize(), radians );
+		rotationMatrix.multiply( object.matrix );                       // pre-multiply
+		object.matrix = rotationMatrix;
+		object.rotation.setFromRotationMatrix( object.matrix );
 	}
 }

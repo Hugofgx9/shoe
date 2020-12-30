@@ -76,10 +76,7 @@ const rotation3d = (rotationMovement, objAngles) => {
 	for (const axe in R) {
 		newAnglesMat = matrixAddition(newAnglesMat, matrixProduct( R[axe], [[rotationMovement.x], [rotationMovement.y], [rotationMovement.z]] ));
 	}
-
 	let newAngles = {x: newAnglesMat[0][0], y: newAnglesMat[1][0], z: newAnglesMat[2][0]};
-	console.log(newAngles);
-
 	return newAngles;
 };
 
