@@ -6,7 +6,7 @@ export default class Scene{
 	constructor() {
 
 		this.scene = new THREE.Scene();
-		this.scene.background = new THREE.Color( 0x1C1C1C );
+		//this.scene.background = new THREE.Color( 0x1C1C1C );
 		this.container = document.querySelector('canvas');
 		this.perspective = 800;
 		this.fov = (180 * (2 * Math.atan(window.innerHeight / 2 / this.perspective))) / Math.PI; //use for camera

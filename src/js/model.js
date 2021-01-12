@@ -2,14 +2,16 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { Power1 } from 'gsap/all';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import shoeFile from '../assets/model/shoeMat.gltf';
-import { rotation3d } from './utils';
+import shoeFile from '../assets/model/Odyssey.gltf';
+//import tissuTexture from '../assets/texture/tissuTexture.jpg';
+//import { rotation3d } from './utils';
 
 export default class Model{
 	constructor(scene){
 
 		this.scene = scene;
-		this.loader = new GLTFLoader();
+		this.GLTFloader = new GLTFLoader();
+		this.loader = new THREE.TextureLoader();
 		this.importModel();
 		this.bindEvents();
 		this.shoeCreated = false;
@@ -19,22 +21,25 @@ export default class Model{
 	importModel() {
 
 		this.material = new THREE.MeshPhongMaterial( { color: 0xc30e2, shininess: 10, specular: 0x50507, emissive: 0x414889} );
-		//const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		//this.shoe = new THREE.Mesh( geometry, this.material);
-		//this.scene.scene.add(this.shoe);
-		//const url = '../assets/model/shoes.gltf';
-		this.loader.load( shoeFile, ( gltf ) => {
+		this.GLTFloader.load( shoeFile, ( gltf ) => {
 			this.shoe = gltf.scene.children[0];
-			//this.shoe.children.map((child) => child.material = this.material)
-			//this.shoe.material = this.material;
-			console.log(this.shoe.matrix);
+			// this.loader.load(tissuTexture, (texture) => {
+			// 	this.shoe.children[1].material.map = texture;
+			// });
+			console.log(this.shoe);
+			//this.shoe.children[1].material.color = new THREE.Color( 0.2, 0.2, 0.2 );
+			//this.shoe.children[1].material.wireframe = true;
+			let left = 50, width = window.innerWidth / 2, top = 0, height = window.innerHeight;
+			this.shoe.position.set(left - window.innerWidth / 2 + width / 2, - top  + (window.innerHeight / 2) - (height / 2));
+
+
 			this.scene.scene.add( this.shoe );
 
-			const shoeAxes = new THREE.AxesHelper( 300 );
-			this.shoe.add ( shoeAxes);
+			// const shoeAxes = new THREE.AxesHelper( 300 );
+			// this.shoe.add ( shoeAxes);
 
-			const sceneAxes = new THREE.AxesHelper( 300 );
-			this.scene.scene.add ( sceneAxes );
+			// const sceneAxes = new THREE.AxesHelper( 300 );
+			// this.scene.scene.add ( sceneAxes );
 
 			this.shoeCreated = true;
 
@@ -46,7 +51,7 @@ export default class Model{
 	}
 
 	drag(e) {
-		let speed = 0.0004;
+		let speed = 0.0002;
 		let newMovement = this.movement;
 		newMovement.x += e.movementX;
 		newMovement.y += e.movementY;
@@ -88,8 +93,8 @@ export default class Model{
 
 	update() {
 		if ( this.shoeCreated == true ) {
-			this.shoe.rotation.y += 0.01;
-			this.shoe.rotation.x += 0.01;
+			this.shoe.rotation.y += 0.005;
+			this.shoe.rotation.x += 0.005;
 		}
 	}
 
