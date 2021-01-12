@@ -1,16 +1,85 @@
-* {
-	margin: 0;
-	padding: 0;
-}
+@import 'init.scss';
+@import 'font.scss';
 
 body {
-	position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-  overflow: hidden;
+  color: white;
+  font-family: 'Roobert';
+  font-weight: normal;
 }
+
+.italic {
+	font-family: 'times new roman';
+	font-style: italic;
+}
+
+section {
+	background-color: #1C1C1C;
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: 100vh;
+	width: 100vw;
+
+	.content {
+		position: relative;
+		grid-column: 2;
+		align-self: center;
+		justify-self: center;
+		z-index: 2;
+		font-size: 1.6rem;
+
+		h1 {
+			text-transform: uppercase;
+			font-size: 3rem;
+  		font-weight: bold;
+
+			//line-height: 0.9em;
+		}
+
+		.italic {
+			font-size: 2.2rem;
+			line-height: 0.8em;
+		}
+
+		h2 {
+			font-size: 1.4rem;
+		}
+
+		.color-part {
+			margin-top: 2em;
+
+			#color-select {
+				display: flex;
+				button {
+					width: 20px;
+					height: 20px;
+					margin-right: 10px;
+					border-radius: 50%;
+					background-color: grey;
+				}
+			}
+		}
+
+		.size-nb {
+			margin-top: 2em;
+			width: 150%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+
+			.size-part, .nb-part {
+				display: grid;
+				grid-template-columns: auto auto;
+			}
+
+			.size-part {
+				select {
+					width: 40px;
+				}
+			}
+		}
+	}
+}
+
 
 canvas {
 	position: absolute;
