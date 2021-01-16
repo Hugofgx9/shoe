@@ -23,17 +23,14 @@ export default class Model{
 		this.material = new THREE.MeshPhongMaterial( { color: 0xc30e2, shininess: 10, specular: 0x50507, emissive: 0x414889} );
 		this.GLTFloader.load( shoeFile, ( gltf ) => {
 			this.shoe = gltf.scene.children[0];
-			// this.loader.load(tissuTexture, (texture) => {
-			// 	this.shoe.children[1].material.map = texture;
-			// });
-			console.log(this.shoe);
-			//this.shoe.children[1].material.color = new THREE.Color( 0.2, 0.2, 0.2 );
-			//this.shoe.children[1].material.wireframe = true;
+
+			// set position
 			let left = 50, width = window.innerWidth / 2, top = 0, height = window.innerHeight;
 			this.shoe.position.set(left - window.innerWidth / 2 + width / 2, - top  + (window.innerHeight / 2) - (height / 2));
 
 
 			this.scene.scene.add( this.shoe );
+
 
 			// const shoeAxes = new THREE.AxesHelper( 300 );
 			// this.shoe.add ( shoeAxes);
@@ -88,12 +85,14 @@ export default class Model{
 		});
 		this.scene.container.addEventListener('mouseup', () => isDown = false);
 		this.scene.container.addEventListener('mouseleave', () => isDown = false );
-
+		document.querySelectorAll('#color-select button').forEach( (btn) => {
+			btn.addEventListener('click', () => this.onBtnClick(btn) );
+		});
 	}
 
 	update() {
 		if ( this.shoeCreated == true ) {
-			this.shoe.rotation.y += 0.005;
+			this.shoe.rotation.y += 0.003;
 			this.shoe.rotation.x += 0.005;
 		}
 	}
@@ -115,5 +114,26 @@ export default class Model{
 		rotationMatrix.multiply( object.matrix );                       // pre-multiply
 		object.matrix = rotationMatrix;
 		object.rotation.setFromRotationMatrix( object.matrix );
+	}
+
+	onBtnClick(btn) {
+		let color = window.getComputedStyle(btn).backgroundColor;
+		this.changeTextileColor(color);
+	}
+
+	changeTextileColor(color) {
+		let textil = this.shoe.getObjectByName('UP001', true).material;
+		let targetColor = new THREE.Color(color);
+		gsap.to(textil.color, 1.5, {
+			r: targetColor.r,
+			g: targetColor.g,
+			b: targetColor.b,
+			ease: Power1.easeOut,
+		});
+	}
+
+	onWindowResize() {
+		let left = 50, width = window.innerWidth / 2, top = 0, height = window.innerHeight;
+		this.shoe.position.set(left - window.innerWidth / 2 + width / 2, - top  + (window.innerHeight / 2) - (height / 2));
 	}
 }
