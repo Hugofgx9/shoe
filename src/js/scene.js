@@ -58,6 +58,7 @@ export default class Scene{
 	onWindowResize() {
 		this.updateCamera();
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.shoe.onWindowResize();
 	}
 
 	onMouseMove(event) {
