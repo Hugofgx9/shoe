@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { Power1 } from 'gsap/all';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import shoeFile from '../assets/model/Odyssey.gltf';
+import ColorPicker from 'simple-color-picker';
 //import tissuTexture from '../assets/texture/tissuTexture.jpg';
 //import { rotation3d } from './utils';
 
@@ -16,6 +17,7 @@ export default class Model{
 		this.bindEvents();
 		this.shoeCreated = false;
 		this.movement = new THREE.Vector3();
+
 	}
 
 	importModel() {
@@ -39,6 +41,7 @@ export default class Model{
 			// this.scene.scene.add ( sceneAxes );
 
 			this.shoeCreated = true;
+			this.initColorPicker();
 
 		}, ( xhr ) => {
 			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -135,5 +138,26 @@ export default class Model{
 	onWindowResize() {
 		let left = 50, width = window.innerWidth / 2, top = 0, height = window.innerHeight;
 		this.shoe.position.set(left - window.innerWidth / 2 + width / 2, - top  + (window.innerHeight / 2) - (height / 2));
+	}
+
+	initColorPicker() {
+		this.colorPicker = new ColorPicker({
+			el: '#color-select .custom-color',
+		});
+		let $toggle = document.querySelector('#color-select .custom-color .toggle');
+		let isOpen = false;
+
+		//hide or show
+		$toggle.addEventListener('click', () => {
+			if (isOpen == false ) {
+				this.colorPicker.$el.style.display = 'block';
+				isOpen = true;
+			} else {
+				this.colorPicker.$el.style.display = 'none';
+				isOpen = false;
+			}
+		});
+
+		this.colorPicker.onChange( (hexa) => this.changeTextileColor(hexa) );
 	}
 }

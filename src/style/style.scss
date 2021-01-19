@@ -58,6 +58,21 @@ section {
 					background-color: grey;
 					cursor: pointer;
 				}
+
+				.custom-color {
+					font-size: 1rem;
+					position: relative;
+
+					.Scp {
+						display:none;
+						position: absolute;
+						bottom: 100%;
+					}
+
+					.toggle {
+						cursor: pointer;
+					}
+				}
 			}
 		}
 
