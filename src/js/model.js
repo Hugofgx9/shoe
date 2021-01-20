@@ -15,12 +15,12 @@ export default class Model{
 		this.GLTFloader = new GLTFLoader();
 		this.loader = new THREE.TextureLoader();
 		this.importModel();
-		this.bindEvents();
 		this.shoeCreated = false;
 		this.movement = new THREE.Vector3();
 		this.emitter = new Emitter();
 
 	}
+
 
 	on(event, callback) {
 		this.emitter.on(event, callback);
@@ -47,7 +47,9 @@ export default class Model{
 			// this.scene.scene.add ( sceneAxes );
 
 			this.shoeCreated = true;
+			this.bindEvents();
 			this.initColorPicker();
+			this.emitter.emit('complete', this.shoe );
 
 		}, ( xhr ) => {
 			this.emitter.emit('load', xhr.loaded / xhr.total );
@@ -55,10 +57,6 @@ export default class Model{
 		}, ( error ) => {
 			console.error( error );
 		});
-	}
-
-	onload(callback) {
-		callback
 	}
 
 	drag(e) {

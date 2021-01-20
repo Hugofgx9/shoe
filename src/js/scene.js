@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import Model from './model';
+import Emitter from './emitter';
 
 export default class Scene{ 
 	constructor() {
+		this.emitter = new Emitter();
 
 		this.scene = new THREE.Scene();
 		//this.scene.background = new THREE.Color( 0x1C1C1C );
@@ -29,9 +31,14 @@ export default class Scene{
 		this.bindEvents();
 	}
 
+	on(event, callback) {
+		this.emitter.on(event, callback);
+	}
+
 	start() {
 		this.shoe = new Model(this);
-		this.shoe.on('load', (ev) => console.log(ev));
+		this.shoe.on('load', (ev) => this.emitter.emit('load', ev));
+		this.shoe.on('complete', (ev) => this.emitter.emit('complete', ev));
 	}
 
 	initLights() {
