@@ -1,4 +1,4 @@
 [[headers]]
-  for = "/*"
+  for = "*.gtlf"
   [headers.values]
-		content-length
+		content-length = 17197129
