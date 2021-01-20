@@ -53,7 +53,7 @@ export default class Model{
 
 		}, ( xhr ) => {
 			let param = xhr.loaded / xhr.total;
-			param = typeof(param) == 'number' ? param : 0;
+			param = isFinite(param) ? param : 0;
 			this.emitter.emit('load', param );
 			xhr.loaded / xhr.total;
 		}, ( error ) => {
