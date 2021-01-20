@@ -12,8 +12,10 @@ let scene = new Scene();
 //loading
 let $counter = document.querySelector('.loader-screen .counter .number');
 let loadingComplete = false;
-scene.on('load', ev => loadHandle(ev));
-scene.on('complete', () => { loadingComplete = true});
+
+//sceneEvents
+scene.on('load', ev => loadHandle(ev, 3) );
+scene.on('complete', () => completeHandle() );
 
 let closeLoader = gsap.timeline({
 	paused: true,
@@ -26,9 +28,11 @@ closeLoader.to('.loader-screen', 1, {
 	opacity: 0,
 });
 
-function loadHandle (value) {
+
+//actions
+function loadHandle (value, time) {
 	console.log(value);
-	gsap.to($counter, 3, {
+	gsap.to($counter, time, {
 		textContent: value * 100,
 		snap: 'textContent',
 		ease: Power3.easeOut,
@@ -36,6 +40,11 @@ function loadHandle (value) {
 			loadingComplete && closeLoader.play();
 		}
 	});
+}
+
+function completeHandle () {
+	loadingComplete = true;
+	//loadHandle(1, 4);
 }
 
 

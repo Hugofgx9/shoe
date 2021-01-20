@@ -52,6 +52,7 @@ export default class Model{
 			this.emitter.emit('complete', this.shoe );
 
 		}, ( xhr ) => {
+			console.log(xhr);
 			let param = xhr.loaded / xhr.total;
 			param = isFinite(param) ? param : 0;
 			this.emitter.emit('load', param );
