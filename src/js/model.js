@@ -4,6 +4,7 @@ import { Power1 } from 'gsap/all';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import shoeFile from '../assets/model/Odyssey.gltf';
 import ColorPicker from 'simple-color-picker';
+import Emitter from './emitter';
 //import tissuTexture from '../assets/texture/tissuTexture.jpg';
 //import { rotation3d } from './utils';
 
@@ -17,7 +18,12 @@ export default class Model{
 		this.bindEvents();
 		this.shoeCreated = false;
 		this.movement = new THREE.Vector3();
+		this.emitter = new Emitter();
 
+	}
+
+	on(event, callback) {
+		this.emitter.on(event, callback);
 	}
 
 	importModel() {
@@ -44,19 +50,24 @@ export default class Model{
 			this.initColorPicker();
 
 		}, ( xhr ) => {
-			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+			this.emitter.emit('load', xhr.loaded / xhr.total );
+			xhr.loaded / xhr.total;
 		}, ( error ) => {
 			console.error( error );
 		});
 	}
 
+	onload(callback) {
+		callback
+	}
+
 	drag(e) {
-		let speed = 0.0002;
+		let speed = 0.00015;
 		let newMovement = this.movement;
 		newMovement.x += e.movementX;
 		newMovement.y += e.movementY;
 
-		gsap.to(this.movement, .3, {
+		gsap.to(this.movement, .5, {
 			x: e.movementX,
 			y: e.movementY,
 			onUpdate: () => {
@@ -151,6 +162,7 @@ export default class Model{
 		$toggle.addEventListener('click', () => {
 			if (isOpen == false ) {
 				this.colorPicker.$el.style.display = 'block';
+				this.colorPicker.onChange( (hexa) => this.changeTextileColor(hexa) );
 				isOpen = true;
 			} else {
 				this.colorPicker.$el.style.display = 'none';
@@ -158,6 +170,5 @@ export default class Model{
 			}
 		});
 
-		this.colorPicker.onChange( (hexa) => this.changeTextileColor(hexa) );
 	}
 }

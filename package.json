@@ -16,6 +16,7 @@
     "sass": "^1.32.4"
   },
   "dependencies": {
+    "emitter": "0.0.5",
     "gsap": "^3.6.0",
     "simple-color-picker": "^1.0.4",
     "three": "^0.124.0"

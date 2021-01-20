@@ -26,11 +26,12 @@ export default class Scene{
 		this.initCamera();
 		this.start();
 		this.update();
-		this.listenWindow();
+		this.bindEvents();
 	}
 
 	start() {
 		this.shoe = new Model(this);
+		this.shoe.on('load', (ev) => console.log(ev));
 	}
 
 	initLights() {
@@ -74,12 +75,16 @@ export default class Scene{
 		this.shoe.update();
 	}
 
-	listenWindow() {
+	bindEvents() {
 		if ('ontouchstart' in window){
 			document.addEventListener('touchmove', (ev) => this.onMouseMove(ev) );
 		}else{
 			window.addEventListener( 'resize', () => this.onWindowResize() );
 			document.addEventListener('mousemove', (ev) => this.onMouseMove(ev) );
 		}
+	}
+
+	loadScene() {
+		this
 	}
 }
