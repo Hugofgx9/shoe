@@ -1,5 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-		cache-control = '''
-		content-length'''
+		content-length
