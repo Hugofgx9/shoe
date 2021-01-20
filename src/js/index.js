@@ -27,6 +27,7 @@ closeLoader.to('.loader-screen', 1, {
 });
 
 function loadHandle (value) {
+	console.log(value);
 	gsap.to($counter, 3, {
 		textContent: value * 100,
 		snap: 'textContent',

@@ -52,7 +52,9 @@ export default class Model{
 			this.emitter.emit('complete', this.shoe );
 
 		}, ( xhr ) => {
-			this.emitter.emit('load', xhr.loaded / xhr.total );
+			let param = xhr.loaded / xhr.total;
+			param = typeof(param) == 'number' ? param : 0;
+			this.emitter.emit('load', param );
 			xhr.loaded / xhr.total;
 		}, ( error ) => {
 			console.error( error );
