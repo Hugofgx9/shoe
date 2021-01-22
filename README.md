@@ -1,0 +1,1 @@
+add .png extension to gltf filename because of netlify xhr trouble with gltf files (content-length in http header response)
