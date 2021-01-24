@@ -48,8 +48,8 @@ export default class Model{
 
 			this.shoeCreated = true;
 			this.bindEvents();
-			this.initColorPicker();
 			this.emitter.emit('complete', this.shoe );
+			this.initColorPicker();
 
 		}, ( xhr ) => {
 
