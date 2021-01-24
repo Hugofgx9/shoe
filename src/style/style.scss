@@ -2,10 +2,10 @@
 @import 'font.scss';
 
 body {
-  color: white;
-  font-family: 'Roobert';
-  font-weight: normal;
-  position: relative;
+	color: white;
+	font-family: 'Roobert';
+	font-weight: normal;
+	position: relative;
 }
 
 .italic {
@@ -67,8 +67,20 @@ section {
 		justify-self: end;
 		align-self: end;
 
-		.Scp {
-			transform: rotate(90deg);
+		#picker {
+			//transform: rotate(90deg);
+			position: relative;
+			z-index: 2;
+
+			.IroSliderBg {
+				rx: 0;
+				ry: 0;
+			}
+
+			.IroBoxBg {
+				rx: 0;
+				ry: 0;
+			}
 		}
 	}
 }
