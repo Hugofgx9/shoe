@@ -1,13 +1,15 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import Model from './model';
-import Emitter from './emitter';
+import Emitter from './emitter'; 
+
 
 export default class Scene{ 
 	constructor() {
 		this.emitter = new Emitter();
 
 		this.scene = new THREE.Scene();
+
 		//this.scene.background = new THREE.Color( 0x1C1C1C );
 		this.container = document.querySelector('canvas');
 		this.perspective = 800;

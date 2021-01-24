@@ -33,7 +33,7 @@ export default class Model{
 			this.shoe = gltf.scene.children[0];
 
 			// set position
-			let left = 50, width = window.innerWidth / 2, top = 0, height = window.innerHeight;
+			let left = 0, width = window.innerWidth, top = 0, height = window.innerHeight;
 			this.shoe.position.set(left - window.innerWidth / 2 + width / 2, - top  + (window.innerHeight / 2) - (height / 2));
 
 
@@ -52,11 +52,11 @@ export default class Model{
 			this.emitter.emit('complete', this.shoe );
 
 		}, ( xhr ) => {
-			console.log(xhr);
-			let param = xhr.loaded / xhr.total;
-			param = isFinite(param) ? param : 0;
-			this.emitter.emit('load', param );
-			xhr.loaded / xhr.total;
+
+			let amount = xhr.loaded / xhr.total;
+			amount = isFinite(amount) ? amount : 0;
+			this.emitter.emit('load', amount );
+
 		}, ( error ) => {
 			console.error( error );
 		});
@@ -154,7 +154,8 @@ export default class Model{
 
 	initColorPicker() {
 		this.colorPicker = new ColorPicker({
-			el: '#color-select .custom-color',
+			el: '#custom-color',
+			width: 45,
 		});
 		let $toggle = document.querySelector('#color-select .custom-color .toggle');
 		let isOpen = false;
