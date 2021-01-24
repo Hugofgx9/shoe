@@ -5,7 +5,7 @@ import {gsap, Power3} from 'gsap';
 
 let scene = new Scene();
 
-//load(scene);
+load(scene);
 
 
 
