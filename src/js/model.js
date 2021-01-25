@@ -47,6 +47,10 @@ export default class Model {
 
 				this.scene.scene.add(this.shoe);
 
+				this.shoe.getObjectByName('MID001', true).material.roughness = 0.25;
+				this.shoe.getObjectByName('Taper1', true).material.roughness = 0;
+				console.log(this.shoe);
+
 				// const shoeAxes = new THREE.AxesHelper( 300 );
 				// this.shoe.add ( shoeAxes);
 
@@ -160,8 +164,8 @@ export default class Model {
 	}
 
 	onWindowResize() {
-		let left = 50,
-			width = window.innerWidth / 2,
+		let left = 0,
+			width = window.innerWidth,
 			top = 0,
 			height = window.innerHeight;
 		this.shoe.position.set(
@@ -172,6 +176,8 @@ export default class Model {
 
 	initColorPicker() {
 		this.colorPicker = new iro.ColorPicker('#picker', {
+			handleSvg: '#handle',
+			handleProps: { x: 0, y: -20 },
 			layout: [
 				{
 					component: iro.ui.Slider,
@@ -196,6 +202,7 @@ export default class Model {
 				},
 			],
 		});
+		this.colorPicker.color.hsl = { h: 350, s: 80, l: 50 };
 
 		this.colorPicker.on('color:change', (color) => {
 			// log the current color as a HEX string

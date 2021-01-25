@@ -53,12 +53,34 @@ section {
 		grid-column: 2;
 		grid-row: 1;
 		justify-self: end;
+
+		.description{
+
+		}
+
+		.price {
+			
+		}
 	}
 
 	#select-preset {
 		grid-column: 1;
 		grid-row: 2;
 		align-self: end;
+
+		ul {
+			display: grid;
+			grid-auto-flow: column;
+			justify-content: start;
+			button {
+				$height: 15px;
+				height: $height;
+				width: $height;
+				margin-right: $height;
+				background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+			}
+		}
+
 	}	
 
 	#custom-color {
@@ -69,12 +91,22 @@ section {
 
 		#picker {
 			//transform: rotate(90deg);
+			$height: 10px;
 			position: relative;
 			z-index: 2;
+
+			.IroSlider {
+				height: calc(#{$height} * 1.8);
+			}
 
 			.IroSliderBg {
 				rx: 0;
 				ry: 0;
+				height: $height;
+			}
+
+			.IroHandle {
+
 			}
 
 			.IroBoxBg {
@@ -83,6 +115,10 @@ section {
 			}
 		}
 	}
+}
+
+#handleSvg {
+	display: none;
 }
 
 
