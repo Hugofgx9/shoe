@@ -1,0 +1,136 @@
+* {
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+button:focus {
+  outline: 0;
+}
+
+@font-face {
+  font-family: "Roobert";
+  font-weight: normal;
+  src: url("Roobert-Regular.c29b7de2.woff") format("woff");
+}
+@font-face {
+  font-family: "Roobert";
+  font-weight: bold;
+  src: url("Roobert-Medium.0cd79b99.woff") format("woff");
+}
+body {
+  color: white;
+  font-family: "Roobert";
+  font-weight: normal;
+  position: relative;
+}
+
+.italic {
+  font-family: "times new roman";
+  font-style: italic;
+}
+
+.loader-screen {
+  width: 100vw;
+  height: 100vh;
+  background: #f0f0f0;
+  color: black;
+  position: absolute;
+  z-index: 10;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader-screen .counter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.5rem;
+}
+.loader-screen .counter .number {
+  justify-self: end;
+}
+
+section {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 3vw;
+}
+section #main-info {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+section #select-preset {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+}
+section #select-preset ul {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+}
+section #select-preset ul button {
+  height: 15px;
+  width: 15px;
+  margin-right: 15px;
+  background: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+section #custom-color {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  align-self: end;
+}
+section #custom-color #picker {
+  position: relative;
+  z-index: 2;
+}
+section #custom-color #picker .IroSlider {
+  height: calc(10px * 1.8);
+}
+section #custom-color #picker .IroSliderBg {
+  rx: 0;
+  ry: 0;
+  height: 10px;
+}
+section #custom-color #picker .IroBoxBg {
+  rx: 0;
+  ry: 0;
+}
+
+#handleSvg {
+  display: none;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+/*# sourceMappingURL=style.33f0096e.css.map */

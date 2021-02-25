@@ -44,11 +44,11 @@ export default class Scene{
 	}
 
 	initLights() {
-		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5);
-		this.scene.add(ambientLight);
+		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.1);
+		//this.scene.add(ambientLight);
 
-		const light = new THREE.PointLight( 0xffffff, 6, 1000, 2 );
-		light.position.set(0, 0, 400 );
+		const light = new THREE.PointLight( 0xffffff, 3, 1000, 2 );
+		light.position.set(0, 300, 100 );
 		this.scene.add( light );
 
 		// const helper = new THREE.PointLightHelper( light, 5 );
@@ -95,6 +95,5 @@ export default class Scene{
 	}
 
 	loadScene() {
-		this
 	}
 }

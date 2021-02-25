@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="e7f71f9edbccbf5c977fdebbbb92c1de">
+	<title>Shoe</title>
+</head>
+<body>
+	<div class="loader-screen">
+		<div>
+			<p>Wait please, website is building for you</p>
+			<p class="counter">
+				<span class="number">0</span>
+				<span classs="unit">%</span>
+			</p>
+		</div>
+	</div>
+	<section>
+		<div id="main-info">
+			<svg width="308" height="108" viewbox="0 0 308 108" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<rect width="308" height="108" fill="url(#pattern0)"></rect>
+				<defs>
+					<pattern id="pattern0" patterncontentunits="objectBoundingBox" width="1" height="1">
+						<use xlink:href="590305dd0e55006d0783ecfbb454c3d8" transform="translate(0 -1.28224) scale(0.000472367 0.00134712)"></use>
+					</pattern>
+					<image id="image0" width="2117" height="2646" xlink:href="dc2862ea4994ece3824cd255a61ab2c5"></image>
+				</defs>
+			</svg>
+
+			<h1>Odyssey</h1>
+			<p class="italic description">The new Shoe</p>
+			<p class="italic price">$184.00</p>
+		</div>
+
+		<div id="select-preset">
+			<h2 class="italic">select a preset</h2>
+			<ul>
+				<li><button></button></li>
+				<li><button></button></li>
+				<li><button></button></li>
+			</ul>
+		</div>
+
+		<div id="custom-color">
+			<h2 class="italic">select a color</h2>
+			<div id="picker"></div>
+		</div>
+
+	</section>
+
+	<svg id="handleSvg">
+		<defs>
+			<g id="handle">
+				<!-- this is where the handle svg content starts -->
+				<rect x="0" y="0" width="2" height="25" fill="#C4C4C4"></rect>
+				<!-- this is where the handle svg content ends -->
+			</g>
+		</defs>
+	</svg>
+	<canvas>
+
+	<script src="dac1de8a67430ef257ac6b198c0f9a5f"></script>
+</canvas></body>
+</html>

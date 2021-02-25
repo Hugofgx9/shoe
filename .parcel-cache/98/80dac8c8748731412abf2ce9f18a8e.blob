@@ -1,0 +1,45 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _gsap = require("gsap");
+
+const load = scene => {
+  let $counter = document.querySelector('.loader-screen .counter .number');
+  let loadingComplete = false; //sceneEvents
+
+  scene.on('load', ev => loadHandle(ev, 3));
+  scene.on('complete', () => completeHandle());
+
+  let closeLoader = _gsap.gsap.timeline({
+    paused: true,
+    onComplete: () => {
+      document.querySelector('.loader-screen').remove();
+    }
+  });
+
+  closeLoader.to('.loader-screen', 1, {
+    opacity: 0
+  }); //actions
+
+  function loadHandle(value, time) {
+    _gsap.gsap.to($counter, time, {
+      textContent: value * 100,
+      snap: 'textContent',
+      ease: _gsap.Power3.easeOut,
+      onComplete: () => {
+        $counter.textContent == 100 && loadingComplete && closeLoader.play();
+      }
+    });
+  }
+
+  function completeHandle() {
+    loadingComplete = true;
+  }
+};
+
+var _default = load;
+exports.default = _default;

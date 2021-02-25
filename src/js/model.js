@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { Power1 } from 'gsap/all';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import shoeFile from '../assets/model/Odysseyv2.gltf.png';
+import shoeFile from 'url:../assets/model/Odysseyv2.gltf.png';
 import iro from '@jaames/iro';
 import Emitter from './emitter';
 //import tissuTexture from '../assets/texture/tissuTexture.jpg';
