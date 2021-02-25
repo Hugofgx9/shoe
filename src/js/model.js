@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { Power1 } from 'gsap/all';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import shoeFile from '../assets/model/Odyssey.gltf.png';
+import shoeFile from '../assets/model/ShoeUV1.gltf';
 import iro from '@jaames/iro';
 import Emitter from './emitter';
 //import tissuTexture from '../assets/texture/tissuTexture.jpg';
@@ -24,12 +24,6 @@ export default class Model {
 	}
 
 	importModel() {
-		this.material = new THREE.MeshPhongMaterial({
-			color: 0xc30e2,
-			shininess: 10,
-			specular: 0x50507,
-			emissive: 0x414889,
-		});
 		this.GLTFloader.load(
 			shoeFile,
 			(gltf) => {
@@ -47,8 +41,8 @@ export default class Model {
 
 				this.scene.scene.add(this.shoe);
 
-				this.shoe.getObjectByName('MID001', true).material.roughness = 0.25;
-				this.shoe.getObjectByName('Taper1', true).material.roughness = 0;
+				//this.shoe.getObjectByName('MID', true).material.roughness = 0.25;
+				//this.shoe.getObjectByName('TAPER', true).material.roughness = 0;
 				console.log(this.shoe);
 
 				// const shoeAxes = new THREE.AxesHelper( 300 );
@@ -56,6 +50,18 @@ export default class Model {
 
 				// const sceneAxes = new THREE.AxesHelper( 300 );
 				// this.scene.scene.add ( sceneAxes );
+
+				let up = this.shoe.getObjectByName('UP', true);
+				up.material.map.wrapS = up.material.map.wrapT = THREE.RepeatWrapping;
+				up.material.map.offset.set( 0, 0 );
+				up.material.map.repeat.set( 2, 2 );
+
+
+
+				// up.material = new THREE.MeshBasicMaterial({
+				// 	color: 'rgb(100%, 100%, 100%)',
+				// 	map: up.material.map,
+				// });
 
 				this.shoeCreated = true;
 				this.bindEvents();
@@ -153,7 +159,7 @@ export default class Model {
 	}
 
 	changeTextileColor(color) {
-		let textil = this.shoe.getObjectByName('UP001', true).material;
+		let textil = this.shoe.getObjectByName('UP', true).material;
 		let targetColor = new THREE.Color(color);
 		gsap.to(textil.color, 1.5, {
 			r: targetColor.r,
@@ -202,7 +208,8 @@ export default class Model {
 				},
 			],
 		});
-		this.colorPicker.color.hsl = { h: 350, s: 80, l: 50 };
+		this.colorPicker.color.hsl = { h: 350, s: 0, l: 70 };
+		this.changeTextileColor(this.colorPicker.color.hexString);
 
 		this.colorPicker.on('color:change', (color) => {
 			// log the current color as a HEX string
